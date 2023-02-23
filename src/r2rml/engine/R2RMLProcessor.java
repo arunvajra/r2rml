@@ -116,7 +116,7 @@ public class R2RMLProcessor {
 			File file = new File(f);
 			String name = createTableNameForFile(file);
 			logger.info("Loading " + file + " as table " + name);
-			String sql = "CREATE TABLE " + name + " AS SELECT * FROM CSVREAD('"  + file.getAbsolutePath() + "', NULL, NULL);";
+			String sql = "CREATE TABLE " + name + " AS SELECT * FROM CSVREAD('"  + file.getAbsolutePath() + "', NULL, 'fieldSeparator=|');";
 			statement.execute(sql);
 			logger.info("Loaded " + file + " as table " + name);	
 		}
