@@ -102,7 +102,7 @@ public class R2RMLProcessor {
 	}
 
 	private Connection createTablesFromCSVFiles() throws Exception {
-		String connectionURL = "jdbc:h2:mem:" + System.currentTimeMillis();
+		String connectionURL = "jdbc:h2:file:C:/data/db" + System.currentTimeMillis();
 		configuration.setConnectionURL(connectionURL);
 		
 		logger.info("Starting in-memory database");
