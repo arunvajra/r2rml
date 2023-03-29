@@ -30,6 +30,9 @@ public class CliOptions {
 	
 	@Option(names = {"--filePerGraph"}, description = "Flag to write the different graphs in separate files (default: false)" )
 	boolean filePerGraph = false;
+	
+	@Option(names = {"-pd", "--persistentDB}, description = "Flag to use presistent database instead of in-memory (default: false)" )
+	boolean persistentDB = false;
 
 	@Option(names = {"-b", "--baseIRI"}, description = "Used in resolving relative IRIs produced by the R2RML mapping" )
 	String baseIRI = null;
