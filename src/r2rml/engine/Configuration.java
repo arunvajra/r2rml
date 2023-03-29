@@ -31,6 +31,7 @@ public class Configuration {
 	private String format = null;
 	private String baseIRI = null;
 	private boolean filePerGraph = false;
+	private boolean persistentDB = false;
 	private List<String> CSVFiles = new ArrayList<String>();
 
 	public Configuration(String path) throws R2RMLException {
@@ -60,6 +61,7 @@ public class Configuration {
 		prefixFile = properties.getProperty("prefixFile");
 		format = properties.getProperty("format", "TURTLE");
 		setFilePerGraph("true".equals(properties.getProperty("filePerGraph", "false").toLowerCase()));
+		persistentDB("true".equals(properties.getProperty("persistentDB", "false").toLowerCase()));
 		baseIRI = properties.getProperty("baseIRI");
 		
 		String files = properties.getProperty("CSVFiles");
@@ -80,6 +82,7 @@ public class Configuration {
 		outputFile = cli.outputFile;
 		format = cli.format;	// TURTLE default define in CliOptions
 		filePerGraph = cli.filePerGraph;
+		persistentDB = cli.persistentDB;
 		baseIRI = cli.baseIRI;
 		
 		String files = cli.CSVFiles;
@@ -163,6 +166,14 @@ public class Configuration {
 
 	public void setFilePerGraph(boolean filePerGraph) {
 		this.filePerGraph = filePerGraph;
+	}
+	
+	public boolean ispersistentDB() {
+		return persistentDB;
+	}
+	
+	public void setpersistentDB(boolean persistentDB) {
+		this.persistentDB = persistentDB;
 	}
 	
 	public List<String> getCSVFiles() {
