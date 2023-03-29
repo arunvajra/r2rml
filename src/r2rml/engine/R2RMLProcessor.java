@@ -108,21 +108,17 @@ public class R2RMLProcessor {
 		
 			logger.info("Starting persistent database");
 			DriverManager.getConnection(connectionURL).close();
-		
-			Connection connection = DriverManager.getConnection(connectionURL);
-			Statement statement = connection.createStatement();
 		} else {
 			String connectionURL = "jdbc:h2:mem:" + System.currentTimeMillis();
 			configuration.setConnectionURL(connectionURL);
 		
 			logger.info("Starting in-memory database");
 			DriverManager.getConnection(connectionURL).close();
-		
-			Connection connection = DriverManager.getConnection(connectionURL);
-			Statement statement = connection.createStatement();
 		}
-			
 		
+		Connection connection = DriverManager.getConnection(connectionURL);
+		Statement statement = connection.createStatement();
+				
 		// for each file, load file as table...
 		for(String f : configuration.getCSVFiles()) {
 			File file = new File(f);
