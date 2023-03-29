@@ -102,7 +102,7 @@ public class R2RMLProcessor {
 	}
 
 	private Connection createTablesFromCSVFiles() throws Exception {
-		if(ispersistentDB()) {
+		if(configuration.ispersistentDB()) {
 			String connectionURL = "jdbc:h2:file:./data/db" + System.currentTimeMillis();
 			configuration.setConnectionURL(connectionURL);
 		
