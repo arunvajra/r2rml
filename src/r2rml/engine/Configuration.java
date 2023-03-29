@@ -61,7 +61,7 @@ public class Configuration {
 		prefixFile = properties.getProperty("prefixFile");
 		format = properties.getProperty("format", "TURTLE");
 		setFilePerGraph("true".equals(properties.getProperty("filePerGraph", "false").toLowerCase()));
-		ispersistentDB("true".equals(properties.getProperty("persistentDB", "false").toLowerCase()));
+		setpersistentDB("true".equals(properties.getProperty("persistentDB", "false").toLowerCase()));
 		baseIRI = properties.getProperty("baseIRI");
 		
 		String files = properties.getProperty("CSVFiles");
