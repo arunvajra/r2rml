@@ -107,32 +107,35 @@ public class R2RMLProcessor {
 			configuration.setConnectionURL(connectionURL);
 		
 			logger.info("Starting persistent database");
-			DriverManager.getConnection(connectionURL).close();
-		} else {
+		} 
+		
+		else {
 			String connectionURL = "jdbc:h2:mem:" + System.currentTimeMillis();
 			configuration.setConnectionURL(connectionURL);
 		
 			logger.info("Starting in-memory database");
+		}
+		
+		void execPersAndInmem() {
 			DriverManager.getConnection(connectionURL).close();
-		}
-		
-		Connection connection = DriverManager.getConnection(connectionURL);
-		Statement statement = connection.createStatement();
+			Connection connection = DriverManager.getConnection(connectionURL);
+			Statement statement = connection.createStatement();
 				
-		// for each file, load file as table...
-		for(String f : configuration.getCSVFiles()) {
-			File file = new File(f);
-			String name = createTableNameForFile(file);
-			logger.info("Loading " + file + " as table " + name);
-			String sql = "CREATE TABLE " + name + " AS SELECT * FROM CSVREAD('"  + file.getAbsolutePath() + "', NULL, 'fieldSeparator=|');";
-			statement.execute(sql);
-			logger.info("Loaded " + file + " as table " + name);	
-		}
+			// for each file, load file as table...
+			for(String f : configuration.getCSVFiles()) {
+				File file = new File(f);
+				String name = createTableNameForFile(file);
+				logger.info("Loading " + file + " as table " + name);
+				String sql = "CREATE TABLE " + name + " AS SELECT * FROM CSVREAD('"  + file.getAbsolutePath() + "', NULL, 'fieldSeparator=|');";
+				statement.execute(sql);
+				logger.info("Loaded " + file + " as table " + name);	
+			}
 		
-		// only close the statement. Don't close connection! It will be returned 
-		statement.close();
-		return connection;
-	}
+			// only close the statement. Don't close connection! It will be returned 
+			statement.close();
+			return connection;
+			}
+		}
 
 	private String createTableNameForFile(File file) {
 		String name = FilenameUtils.getBaseName(file.getAbsolutePath());
